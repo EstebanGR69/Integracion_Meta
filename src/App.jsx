@@ -42,7 +42,7 @@ function App() {
 
       /* window.FB.login(facebookLoginHandler,{scope:'public_profile'}) */
       /*Validar respuesta*/
-      window.FB.getLoginStatus(response=>{
+      FB.getLoginStatus(response=>{
         console.log("Respuesta ",response)
           /*En caso de conexión exitosa, se manejará la respuesta*/
 /*           if(response.status=="connected"){

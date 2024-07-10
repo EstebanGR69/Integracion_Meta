@@ -33,6 +33,9 @@ function App() {
      }(document, 'script', 'facebook-jssdk'));
 
     setSdkLoaded(true);
+    FB.getLoginStatus(function(response) {
+      console.log(response);
+  });
   };
 
   return (

@@ -38,7 +38,7 @@ function App() {
     }else{
       console.log("SÍ SE CARGÓ EL SDK DE FACEBOOK")
 
-      console.log("SDK de facebook ",window.FB)
+      console.log("SDK de facebook xd",FB)
 
       /* window.FB.login(facebookLoginHandler,{scope:'public_profile'}) */
       /*Validar respuesta*/

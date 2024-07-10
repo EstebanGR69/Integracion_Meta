@@ -1,10 +1,17 @@
-import { useState, useEffect} from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
+import './App.css';
 
 function App() {
-  useEffect(()=>{
+  const [sdkLoaded, setSdkLoaded] = useState(false);
+
+  const loadSdk = () => {
+    if (sdkLoaded) {
+      console.log("SDK ya cargado");
+      return;
+    }
+
     window.fbAsyncInit = function() {
       FB.init({
         appId      : '831868978888221',
@@ -24,14 +31,15 @@ function App() {
        js.src = "https://connect.facebook.net/en_US/sdk.js";
        fjs.parentNode.insertBefore(js, fjs);
      }(document, 'script', 'facebook-jssdk'));
-  },[])
-  if(window.FB){
-    console.log("SDK de facebook ",window.FB)
-  }
+
+    setSdkLoaded(true);
+  };
+
   return (
     <>
+      <button onClick={loadSdk}>Cargar SDK de Facebook</button>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

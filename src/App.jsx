@@ -6,9 +6,6 @@ function App() {
 
   const facebookLoginHandler=(response)=>{
     console.log("Respuesta ", response)
-    if(response.status=="connected"){
-        window.FB.api('/me?fields=id,name,email,picture',userData=>{})
-    }
   }
 
   useEffect(()=>{
@@ -34,30 +31,32 @@ function App() {
 
     },[])
 
-    var IniciarSesion=()=>{
-
-      /*Condicional para validar que existe el SDK de facebook*/
-        if(!window.FB){
+  var IniciarSesion=()=>{
+    /*Condicional para validar que existe el SDK de facebook*/
+    if(!window.FB){
       console.log("NO SE CARGÓ EL SDK DE FACEBOOK")
-        }else{
-        console.log("SÍ SE CARGÓ EL SDK DE FACEBOOK")
-        console.log("SDK de facebook ",window.FB)
-        window.FB.login(facebookLoginHandler,{scope:'public_profile'})
-        /*Validar respuesta*/
-        window.FB.getLoginStatus(response=>{
+    }else{
+      console.log("SÍ SE CARGÓ EL SDK DE FACEBOOK")
+
+      console.log("SDK de facebook ",window.FB)
+
+      /* window.FB.login(facebookLoginHandler,{scope:'public_profile'}) */
+      /*Validar respuesta*/
+      window.FB.getLoginStatus(response=>{
+        console.log("Respuesta ",response)
           /*En caso de conexión exitosa, se manejará la respuesta*/
-          if(response.status=="connected"){
+/*           if(response.status=="connected"){
               window.FB.login(facebookLoginHandler)
-          }
+          } */
           /*En este caso hubo un problema con la app de meta*/
-          if(response.status=="unknown"){
-              window.FB.login(facebookLoginHandler)
+/*           if(response.status=="unknown"){
+              FB.login(facebookLoginHandler)
               console.log("Se cargó el SDK correctamente, pero hubo un error con la APP de meta")
           }else {
               console.log(response,"Usuario no autorizado")
               window.FB.login(facebookLoginHandler)
-            }
-        })
+            } */
+      })
         }
       }
   return (

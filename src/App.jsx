@@ -32,42 +32,46 @@ function App() {
     },[])
 
   var IniciarSesion=()=>{
-    /*Condicional para validar que existe el SDK de facebook*/
-    if(!window.FB){
-      console.log("NO SE CARGÓ EL SDK DE FACEBOOK")
-    }else{
-      console.log("SÍ SE CARGÓ EL SDK DE FACEBOOK")
+    try {
+      /*Condicional para validar que existe el SDK de facebook*/
+      if(!window.FB){
+        console.log("NO SE CARGÓ EL SDK DE FACEBOOK")
+      }else{
+        console.log("SÍ SE CARGÓ EL SDK DE FACEBOOK")
 
-      console.log("SDK de facebook xd",FB)
+        console.log("SDK de facebook xd",FB)
 
-       FB.login(function(response) {
-        if (response.authResponse) {
-          console.log('¡Bienvenido! Obteniendo tu información....');
-          FB.api('/me', { fields: 'name, email' }, function(response) {
-            document.getElementById("profile").innerHTML = "Es bueno verte, " + response.name + ". Veo que tu dirección de correo electrónico es " + response.email;
-          });
-        }else{
-        // Si no has iniciado sesión, se abrirá el cuadro de diálogo de inicio de sesión para que inicies sesión y te pedirá permiso para obtener tu perfil público y correo electrónico
-        console.log('El usuario canceló el inicio de sesión o no autorizó por completo.');
-    }
-    });
- 
-      /*Validar respuesta*/
-      FB.getLoginStatus(response=>{
-        console.log("Respuesta ",response)
-          /*En caso de conexión exitosa, se manejará la respuesta*/
-/*           if(response.status=="connected"){
-              window.FB.login(facebookLoginHandler)
-          } */
-          /*En este caso hubo un problema con la app de meta*/
-/*           if(response.status=="unknown"){
-              FB.login(facebookLoginHandler)
-              console.log("Se cargó el SDK correctamente, pero hubo un error con la APP de meta")
-          }else {
-              console.log(response,"Usuario no autorizado")
-              window.FB.login(facebookLoginHandler)
+        FB.login(function(response) {
+          if (response.authResponse) {
+            console.log('¡Bienvenido! Obteniendo tu información....');
+            FB.api('/me', { fields: 'name, email' }, function(response) {
+              document.getElementById("profile").innerHTML = "Es bueno verte, " + response.name + ". Veo que tu dirección de correo electrónico es " + response.email;
+            });
+          }else{
+          // Si no has iniciado sesión, se abrirá el cuadro de diálogo de inicio de sesión para que inicies sesión y te pedirá permiso para obtener tu perfil público y correo electrónico
+          console.log('El usuario canceló el inicio de sesión o no autorizó por completo.');
+      }
+      });
+  
+        /*Validar respuesta*/
+        FB.getLoginStatus(response=>{
+          console.log("Respuesta ",response)
+            /*En caso de conexión exitosa, se manejará la respuesta*/
+  /*           if(response.status=="connected"){
+                window.FB.login(facebookLoginHandler)
             } */
-      })
+            /*En este caso hubo un problema con la app de meta*/
+  /*           if(response.status=="unknown"){
+                FB.login(facebookLoginHandler)
+                console.log("Se cargó el SDK correctamente, pero hubo un error con la APP de meta")
+            }else {
+                console.log(response,"Usuario no autorizado")
+                window.FB.login(facebookLoginHandler)
+              } */
+        })
+      } 
+    } catch (error) {
+      console.log("Error unu",error)
     }
   }
   return (

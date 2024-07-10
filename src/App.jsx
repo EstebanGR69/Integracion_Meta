@@ -40,7 +40,18 @@ function App() {
 
       console.log("SDK de facebook xd",FB)
 
-      /* window.FB.login(facebookLoginHandler,{scope:'public_profile'}) */
+       FB.login(function(response) {
+        if (response.authResponse) {
+          console.log('¡Bienvenido! Obteniendo tu información....');
+          FB.api('/me', { fields: 'name, email' }, function(response) {
+            document.getElementById("profile").innerHTML = "Es bueno verte, " + response.name + ". Veo que tu dirección de correo electrónico es " + response.email;
+          });
+        }else{
+        // Si no has iniciado sesión, se abrirá el cuadro de diálogo de inicio de sesión para que inicies sesión y te pedirá permiso para obtener tu perfil público y correo electrónico
+        console.log('El usuario canceló el inicio de sesión o no autorizó por completo.');
+    }
+    });
+ 
       /*Validar respuesta*/
       FB.getLoginStatus(response=>{
         console.log("Respuesta ",response)
@@ -57,8 +68,8 @@ function App() {
               window.FB.login(facebookLoginHandler)
             } */
       })
-        }
-      }
+    }
+  }
   return (
     <div className="App">
       <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex items-center" onClick={IniciarSesion}>
